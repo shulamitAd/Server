@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EFModel
+namespace Project.BL.Interface
 {
-    public class Class1
+    public interface ILogger
     {
+        void WriteLog(string message);
     }
 }

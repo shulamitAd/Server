@@ -1,5 +1,6 @@
 ﻿using DataProvider;
 using EFModel;
+using EFModel.CustomEntities;
 using EFModel.Entities;
 using Moq;
 using Project.BL.Interface;
@@ -26,7 +27,7 @@ namespace UnitTestProject
             _data = data;
         }
 
-        public List<Jobs> GetChartData()
+        public List<Jobs> GetChartData(FromToModel fromTo)
         {
             var mockSet = new Mock<DbSet<Jobs>>();
             mockSet.As<IQueryable<Jobs>>().Setup(m => m.Provider).Returns(_data.Provider);
@@ -37,8 +38,8 @@ namespace UnitTestProject
             var mockContext = new Mock<ProjectContext>();
             mockContext.Setup(c => c.Jobs).Returns(mockSet.Object);
 
-            var service = new ChartDataProvider(mockContext.Object);
-            return service.GetChartData();
+            var dataProvider = new JobDataProvider(mockContext.Object);
+            return dataProvider.GetChartData(fromTo);
         }
     }
 }

@@ -34,6 +34,7 @@ namespace WebApi
         private static void RegisterContainer(Container container)
         {
             container.Register<IJobBL, JobBL>(Lifestyle.Singleton);
+            container.Register<ILogger, Logger>(Lifestyle.Singleton);
         }
     }
 }

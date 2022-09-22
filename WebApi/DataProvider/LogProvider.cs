@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace DataProvider
 {
-    public class ChartDataProvider
+    public class LogProvider
     {
         private ProjectContext m_context;
-        public ChartDataProvider(ProjectContext ctx)
+        public LogProvider(ProjectContext ctx)
         {
             m_context = ctx;
         }
-        public List<Jobs> GetChartData()
+        public void AddLog(string message)
         {
-            return m_context.Jobs.ToList();
+            m_context.Logs.Add(new Log() { TimeStamp = DateTime.Now, Message = message });
         }
     }
 }

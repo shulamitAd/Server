@@ -1,4 +1,5 @@
-﻿using EFModel.Entities;
+﻿using EFModel.CustomEntities;
+using EFModel.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Project.BL.Interface
 {
     public interface IJobBL
     {
-        List<Jobs> GetChartData();
+        List<Jobs> GetChartData(FromToModel fromTo);
     }
 }

@@ -54,8 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CustomEntities\FromToModel.cs" />
     <Compile Include="Entities\Jobs.cs" />
+    <Compile Include="Entities\Log.cs" />
     <Compile Include="Migrations\202209210805311_FirstMigration.cs" />
     <Compile Include="Migrations\202209210805311_FirstMigration.designer.cs">
       <DependentUpon>202209210805311_FirstMigration.cs</DependentUpon>
@@ -63,6 +64,10 @@
     <Compile Include="Migrations\202209210822559_InsertData.cs" />
     <Compile Include="Migrations\202209210822559_InsertData.designer.cs">
       <DependentUpon>202209210822559_InsertData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209221916016_LogTable.cs" />
+    <Compile Include="Migrations\202209221916016_LogTable.designer.cs">
+      <DependentUpon>202209221916016_LogTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectContext.cs" />
@@ -78,6 +83,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209210822559_InsertData.resx">
       <DependentUpon>202209210822559_InsertData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209221916016_LogTable.resx">
+      <DependentUpon>202209221916016_LogTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
