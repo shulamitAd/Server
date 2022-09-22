@@ -31,8 +31,7 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-                //TODO add logs
-                _Logger.WriteLog(ex.Message);
+                _Logger.WriteLog("error on JobController.GetChartData:" + ex.Message);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
         }
