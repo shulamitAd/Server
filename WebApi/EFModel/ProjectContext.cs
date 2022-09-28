@@ -11,12 +11,12 @@ namespace EFModel
     public class ProjectContext : DbContext
     {
 
-        //static string connectionString = "";
-        //static ProjectContext()
-        //{
-        //    connectionString = "Data Source=DESKTOP-4PT3KBP\\DEV;Initial Catalog=Project3;Integrated Security=True";
-        //}
-        public ProjectContext():base()
+        static string connectionString = "";
+        static ProjectContext()
+        {
+            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["Project"].ConnectionString;
+        }
+        public ProjectContext():base(connectionString)
         {
 
         }

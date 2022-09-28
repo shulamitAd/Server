@@ -21,6 +21,8 @@ namespace DataProvider
             return m_context.Jobs.Where(x =>
             (!fromTo.From.HasValue || x.Date >= fromTo.From.Value) &&
             (!fromTo.To.HasValue || x.Date <= fromTo.To.Value))
+            .OrderBy(x => x.Date)
+            .Take(1000)
                 .ToList();
         }
     }
