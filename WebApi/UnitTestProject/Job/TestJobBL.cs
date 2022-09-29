@@ -16,29 +16,20 @@ namespace UnitTestProject
     public class TestJobBL : IJobBL
     {
 
-        private IQueryable<Jobs> _data;
+        private ProjectContext m_context;
         public TestJobBL()
         {
 
         }
 
-        public TestJobBL(IQueryable<Jobs> data)
+        public TestJobBL(ProjectContext context)
         {
-            _data = data;
+            m_context = context;
         }
 
         public List<Jobs> GetChartData(FromToModel fromTo)
         {
-            var mockSet = new Mock<DbSet<Jobs>>();
-            mockSet.As<IQueryable<Jobs>>().Setup(m => m.Provider).Returns(_data.Provider);
-            mockSet.As<IQueryable<Jobs>>().Setup(m => m.Expression).Returns(_data.Expression);
-            mockSet.As<IQueryable<Jobs>>().Setup(m => m.ElementType).Returns(_data.ElementType);
-            mockSet.As<IQueryable<Jobs>>().Setup(m => m.GetEnumerator()).Returns(() => _data.GetEnumerator());
-
-            var mockContext = new Mock<ProjectContext>();
-            mockContext.Setup(c => c.Jobs).Returns(mockSet.Object);
-
-            var dataProvider = new JobDataProvider(mockContext.Object);
+            var dataProvider = new JobDataProvider(m_context);
             return dataProvider.GetChartData(fromTo);
         }
     }

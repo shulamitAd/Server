@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using EFModel;
 using EFModel.CustomEntities;
 using EFModel.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,8 +30,17 @@ namespace UnitTestProject
             }
             .AsQueryable();
 
-            var testJob = new TestJobBL(data);
-            var testLogger = new TestLogger();
+            var mockSet = new Mock<DbSet<Jobs>>();
+            mockSet.As<IQueryable<Jobs>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Jobs>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Jobs>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Jobs>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+
+            var mockContext = new Mock<ProjectContext>();
+            mockContext.Setup(c => c.Jobs).Returns(mockSet.Object);
+
+            var testJob = new TestJobBL(mockContext.Object);
+            var testLogger = new TestLogger(mockContext.Object);
 
             var controller = new JobController(testJob, testLogger);
             controller.Request = new HttpRequestMessage();
